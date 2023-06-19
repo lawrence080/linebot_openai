@@ -101,9 +101,10 @@ def setUpInterface():
             }),
             RichMenuArea(bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
             action= {
-                MessageAction(
+                PostbackAction(
                     label='message',
-                    text=buttontemplate()
+                    display = "button testing ",
+                    data = "richmenu"
                     )
                 }
             )]
@@ -113,31 +114,34 @@ def setUpInterface():
     print(rich_menu_id)
 
 
-def buttontemplate():
-    button_template_message = TemplateSendMessage(
-    alt_text = "invisiable",
-    template = ButtonsTemplate(
-        thumbnail_imgae_url = "",
-        title = "button testing ",
-        text = "text....",
-        actions = [
-                URIAction(
-                    label = "line",
-                    uri = "https://line.me"
-                ),
-                MessageAction(
-                    label = "button testing",
-                    text = "testing "
-                ),
-                PostbackAction(
-                    lable = "postback testing",
-                    displayText = "test postback plz",
-                    data = "testing ..."
-                )
-            ]
+@handler.add(PostbackEvent)
+def buttontemplate(event):
+    if event.postback.data == "richmenu":
+        button_template_message = TemplateSendMessage(
+        alt_text = "invisiable",
+        template = ButtonsTemplate(
+            thumbnail_imgae_url = "",
+            title = "button testing ",
+            text = "text....",
+            actions = [
+                    URIAction(
+                        label = "line",
+                        uri = "https://line.me"
+                    ),
+                    MessageAction(
+                        label = "button testing",
+                        text = "testing "
+                    ),
+                    PostbackAction(
+                        lable = "postback testing",
+                        displayText = "test postback plz",
+                        data = "testing ..."
+                    )
+                ]
+            )
         )
-    )
-    return button_template_message
+        line_bot_api.reply_message(event.reply_token,button_template_message )
+        return
         
         
 import os
