@@ -134,8 +134,8 @@ def buttontemplate(event):
                         text = "testing "
                     ),
                     PostbackAction(
-                        lable = "postback testing",
-                        displayText = "test postback plz",
+                        label = "postback testing",
+                        display_text = "test postback plz",
                         data = "testing ..."
                     )
                 ]
