@@ -63,7 +63,7 @@ def callback():
 
 
 #處理訊息
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(postback, message=TextMessage)
 def handle_message(event, rep):
     if flag == True:
         msg = event.message.text
@@ -94,7 +94,7 @@ def handle_message(event, rep):
         return
     else :
         message  = "please chose one of following before we can help you"
-        line_bot_api.reply_message(event.reply_token, message)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(message) )
     
         
     
@@ -126,7 +126,7 @@ def setUpInterface():
             action= {
                 "type":"postback",
                 "label":'postback',
-                "display_text":'as question to AI',
+                "display_text":'has question to AI',
                 "data":'action=buy&itemid=2'
             }),
             RichMenuArea(bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
