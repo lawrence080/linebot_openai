@@ -91,11 +91,7 @@ def setUpInterface():
         chat_bar_text="測試使用",
         areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
             bounds=RichMenuBounds(x=0, y=0, width=400, height=405),
-            action= {
-                "type":"message",
-                "label":"zong A",
-                "text": "infoA"
-            })
+            action= URIAction(label='link test', uri='https://line.me'))
             ,
             RichMenuArea(bounds=RichMenuBounds(x=400, y=0, width=400, height=405),
             action= {
@@ -105,10 +101,11 @@ def setUpInterface():
             }),
             RichMenuArea(bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
             action= {
-                "type":"message",
-                "label":"zong C",
-                "text": "infoC"
-            }
+                MessageAction(
+                    label='message',
+                    text=buttontemplate()
+                    )
+                }
             )]
     )
     rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
@@ -116,6 +113,31 @@ def setUpInterface():
     print(rich_menu_id)
 
 
+def buttontemplate():
+    button_template_message = TemplateSendMessage(
+    alt_text = "invisiable",
+    template = ButtonsTemplate(
+        thumbnail_imgae_url = "",
+        title = "button testing ",
+        text = "text....",
+        actions = [
+                URIAction(
+                    label = "line",
+                    uri = "https://line.me"
+                ),
+                MessageAction(
+                    label = "button testing",
+                    text = "testing "
+                ),
+                PostbackAction(
+                    lable = "postback testing",
+                    displayText = "test postback plz",
+                    data = "testing ..."
+                )
+            ]
+        )
+    )
+    return button_template_message
         
         
 import os
