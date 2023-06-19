@@ -91,7 +91,25 @@ def setUpInterface():
         chat_bar_text="測試使用",
         areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
             bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
-            action=URIAction(label='Go to line.me', uri='https://line.me'))]
+            action= {
+                "type":"message",
+                "label":"zong A",
+                "text": "infoA"
+            }
+            # ,
+            # bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            # action= {
+            #     "type":"message",
+            #     "label":"zong B",
+            #     "text": "infoB"
+            # },
+            # bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            # action= {
+            #     "type":"message",
+            #     "label":"zong C",
+            #     "text": "infoC"
+            # }
+            )]
     )
     rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
     return rich_menu_id
