@@ -45,7 +45,7 @@ def callback():
     app.logger.info("Request body: " + body)
 
     d = json.loads(body)
-    User_id=d["events"][0]["source"]["userId"]
+    user_id=d["events"][0]["source"]["userId"]
 
     rich_menu_id = setUpInterface()
     with open("richmenu.png",'rb') as f:
