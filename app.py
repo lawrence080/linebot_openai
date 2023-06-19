@@ -95,15 +95,15 @@ def setUpInterface():
                 "type":"message",
                 "label":"zong A",
                 "text": "infoA"
-            }
+            })
             ,
-            bounds=RichMenuBounds(x=400, y=0, width=400, height=405),
+            RichMenuArea(bounds=RichMenuBounds(x=400, y=0, width=400, height=405),
             action= {
                 "type":"message",
                 "label":"zong B",
                 "text": "infoB"
-            },
-            bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
+            }),
+            RichMenuArea(bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
             action= {
                 "type":"message",
                 "label":"zong C",
