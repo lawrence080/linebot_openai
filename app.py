@@ -96,19 +96,19 @@ def setUpInterface():
                 "label":"zong A",
                 "text": "infoA"
             }
-            # ,
-            # bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
-            # action= {
-            #     "type":"message",
-            #     "label":"zong B",
-            #     "text": "infoB"
-            # },
-            # bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
-            # action= {
-            #     "type":"message",
-            #     "label":"zong C",
-            #     "text": "infoC"
-            # }
+            ,
+            bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            action= {
+                "type":"message",
+                "label":"zong B",
+                "text": "infoB"
+            },
+            bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            action= {
+                "type":"message",
+                "label":"zong C",
+                "text": "infoC"
+            }
             )]
     )
     rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
