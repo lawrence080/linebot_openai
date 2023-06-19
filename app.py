@@ -101,7 +101,7 @@ def setUpInterface():
             }),
             RichMenuArea(bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
             action= {
-                PostbackAction(
+                PostbackTemplateAction(
                     label='message',
                     display = "button testing ",
                     data = "richmenu"
