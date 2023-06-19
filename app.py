@@ -90,20 +90,20 @@ def setUpInterface():
         name="first richMenu",  # display name
         chat_bar_text="測試使用",
         areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
-            bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            bounds=RichMenuBounds(x=0, y=0, width=400, height=405),
             action= {
                 "type":"message",
                 "label":"zong A",
                 "text": "infoA"
             }
             ,
-            bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            bounds=RichMenuBounds(x=400, y=0, width=400, height=405),
             action= {
                 "type":"message",
                 "label":"zong B",
                 "text": "infoB"
             },
-            bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
             action= {
                 "type":"message",
                 "label":"zong C",
