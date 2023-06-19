@@ -25,6 +25,8 @@ handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
 # OPENAI API Key初始化設定
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+flag = False
+
 
 def GPT_response(text):
     # 接收回應
@@ -60,17 +62,43 @@ def callback():
     return 'OK'
 
 
-# 處理訊息
-# @handler.add(MessageEvent, message=TextMessage)
-# def handle_message(event):
-#     msg = event.message.text
-#     GPT_answer = GPT_response(msg)
-#     print(GPT_answer)
-#     line_bot_api.reply_message(event.reply_token, TextSendMessage(GPT_answer))
+#處理訊息
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event, rep):
+    if flag == True:
+        msg = event.message.text
+        GPT_answer = GPT_response(msg)
+        print(GPT_answer)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(GPT_answer))
+        button_template_message = TemplateSendMessage(
+        alt_text = "invisiable",
+        template = ButtonsTemplate(
+            thumbnail_imgae_url = "",
+            title = "any more question?",
+            text = "yes or no",
+            actions = [
+                    PostbackAction(
+                        label = "yes",
+                        display_text = "what's your question",
+                        data = "yes"
+                    ),
+                    PostbackAction(
+                        label = "no",
+                        display_text = "ok thank you ",
+                        data = "no"
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token,button_template_message )
+        return
+    else :
+        message  = "please chose one of following before we can help you"
+        line_bot_api.reply_message(event.reply_token, message)
+    
+        
+    
 
-@handler.add(PostbackEvent)
-def handle_message(event):
-    print(event.postback.data)
 
 
 @handler.add(MemberJoinedEvent)
@@ -81,23 +109,25 @@ def welcome(event):
     name = profile.display_name
     message = TextSendMessage(text=f'{name}歡迎加入')
     line_bot_api.reply_message(event.reply_token, message)
+
+
     
 
 def setUpInterface():
     rich_menu_to_create = RichMenu(
         size=RichMenuSize(width=1200, height=405),
-        selected=False,
+        selected=True,
         name="first richMenu",  # display name
         chat_bar_text="測試使用",
         areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
             bounds=RichMenuBounds(x=0, y=0, width=400, height=405),
-            action= URIAction(label='link test', uri='https://line.me'))
-            ,
+            action= URIAction(label='link test', uri='https://line.me')),
             RichMenuArea(bounds=RichMenuBounds(x=400, y=0, width=400, height=405),
             action= {
-                "type":"message",
-                "label":"zong B",
-                "text": "infoB"
+                "type":"postback",
+                "label":'postback',
+                "display_text":'as question to AI',
+                "data":'action=buy&itemid=2'
             }),
             RichMenuArea(bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
             action= 
@@ -116,7 +146,7 @@ def setUpInterface():
 
 
 @handler.add(PostbackEvent)
-def buttontemplate(event):
+def buttontemplate(self,event):
     if event.postback.data == 'action=buy&itemid=1':
         button_template_message = TemplateSendMessage(
         alt_text = "invisiable",
@@ -136,13 +166,17 @@ def buttontemplate(event):
                     PostbackAction(
                         label = "postback testing",
                         display_text = "test postback plz",
-                        data = "testing ..."
+                        data = "testing"
                     )
                 ]
             )
         )
         line_bot_api.reply_message(event.reply_token,button_template_message )
         return
+    elif event.postback.data == 'action=buy&itemid=2' or 'yes':
+        self.flag = True
+    elif event.postback.data == 'no':
+        self.flag = False
         
         
 import os
