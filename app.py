@@ -101,12 +101,12 @@ def setUpInterface():
             }),
             RichMenuArea(bounds=RichMenuBounds(x=800, y=0, width=400, height=405),
             action= {
-                PostbackTemplateAction(
-                    label='message',
-                    display = "button testing ",
-                    data = 'action=buy&itemid=1'
-                    )
-                }
+                "type":"postback",
+                "label":'postback',
+                "display_text":'postback text',
+                "data":'action=buy&itemid=1'
+            }
+                
             )]
     )
     rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
@@ -116,7 +116,7 @@ def setUpInterface():
 
 @handler.add(PostbackEvent)
 def buttontemplate(event):
-    if event.postback.data == 'action=buy&itemid=1':
+    if event.postback.data == 'richmenu':
         button_template_message = TemplateSendMessage(
         alt_text = "invisiable",
         template = ButtonsTemplate(
