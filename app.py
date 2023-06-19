@@ -51,12 +51,12 @@ def callback():
 
 
 # 處理訊息
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    msg = event.message.text
-    GPT_answer = GPT_response(msg)
-    print(GPT_answer)
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(GPT_answer))
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event):
+#     msg = event.message.text
+#     GPT_answer = GPT_response(msg)
+#     print(GPT_answer)
+#     line_bot_api.reply_message(event.reply_token, TextSendMessage(GPT_answer))
 
 @handler.add(PostbackEvent)
 def handle_message(event):
@@ -71,6 +71,23 @@ def welcome(event):
     name = profile.display_name
     message = TextSendMessage(text=f'{name}歡迎加入')
     line_bot_api.reply_message(event.reply_token, message)
+    
+
+def setUpInterface():
+    rich_menu_to_create = RichMenu(
+        size=RichMenuSize(width=2500, height=843),
+        selected=False,
+        name="first richMenu",  # display name
+        chat_bar_text="測試使用",
+        areas=[RichMenuArea(  # 這邊是陣列的格式，可以動態設定自己要的區域想要有什麼功能
+            bounds=RichMenuBounds(x=0, y=0, width=1200, height=405),
+            action=URIAction(label='Go to line.me', uri='https://line.me'))]
+    )
+    rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+    return rich_menu_id
+    print(rich_menu_id)
+
+
         
         
 import os
