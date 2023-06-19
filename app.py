@@ -48,7 +48,7 @@ def callback():
     User_id=d["events"][0]["source"]["userId"]
 
     rich_menu_id = setUpInterface()
-    with open("richmenu.png",'rb') as f:
+    with open("richmenu.jpg",'rb') as f:
         line_bot_api.set_rich_menu_image(rich_menu_id, "img/jpg", f)
 
     line_bot_api.link_rich_menu_to_user(user_id,rich_menu_id)
