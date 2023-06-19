@@ -104,7 +104,7 @@ def setUpInterface():
                 PostbackTemplateAction(
                     label='message',
                     display = "button testing ",
-                    data = "richmenu"
+                    data = 'richmenu'
                     )
                 }
             )]
@@ -116,7 +116,7 @@ def setUpInterface():
 
 @handler.add(PostbackEvent)
 def buttontemplate(event):
-    if event.postback.data == "richmenu":
+    if event.postback.data == 'richmenu':
         button_template_message = TemplateSendMessage(
         alt_text = "invisiable",
         template = ButtonsTemplate(
