@@ -13,6 +13,7 @@ import tempfile, os
 import datetime
 import openai
 import time
+import json
 #======python的函數庫==========
 
 app = Flask(__name__)
@@ -42,6 +43,15 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
+
+    d = json.loads(body)
+    User_id=d["events"][0]["source"]["userId"]
+
+    rich_menu_id = setUpInterface()
+    with open("richmenu.png",'rb') as f:
+        line_bot_api.set_rich_menu_image(rich_menu_id, "img/jpg", f)
+
+    line_bot_api.link_rich_menu_to_user(user_id,rich_menu_id)
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -75,7 +85,7 @@ def welcome(event):
 
 def setUpInterface():
     rich_menu_to_create = RichMenu(
-        size=RichMenuSize(width=2500, height=843),
+        size=RichMenuSize(width=1200, height=405),
         selected=False,
         name="first richMenu",  # display name
         chat_bar_text="測試使用",
