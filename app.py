@@ -49,7 +49,7 @@ def callback():
 
     rich_menu_id = setUpInterface()
     with open("richmenu.png",'rb') as f:
-        line_bot_api.set_rich_menu_image(rich_menu_id, "img/png", f)
+        line_bot_api.set_rich_menu_image(rich_menu_id, "image/png", f)
 
     line_bot_api.link_rich_menu_to_user(user_id,rich_menu_id)
     # handle webhook body
