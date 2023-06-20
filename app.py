@@ -63,38 +63,38 @@ def callback():
 
 
 #處理訊息
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event, rep):
-    if flag == True:
-        msg = event.message.text
-        GPT_answer = GPT_response(msg)
-        print(GPT_answer)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(GPT_answer))
-        button_template_message = TemplateSendMessage(
-        alt_text = "invisiable",
-        template = ButtonsTemplate(
-            thumbnail_imgae_url = "",
-            title = "any more question?",
-            text = "yes or no",
-            actions = [
-                    PostbackAction(
-                        label = "yes",
-                        display_text = "what's your question",
-                        data = "yes"
-                    ),
-                    PostbackAction(
-                        label = "no",
-                        display_text = "ok thank you ",
-                        data = "no"
-                    )
-                ]
-            )
-        )
-        line_bot_api.reply_message(event.reply_token,button_template_message )
-        return
-    else :
-        message  = "please chose one of following before we can help you"
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(message) )
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event, rep):
+#     if flag == True:
+#         msg = event.message.text
+#         GPT_answer = GPT_response(msg)
+#         print(GPT_answer)
+#         line_bot_api.reply_message(event.reply_token, TextSendMessage(GPT_answer))
+#         button_template_message = TemplateSendMessage(
+#         alt_text = "invisiable",
+#         template = ButtonsTemplate(
+#             thumbnail_imgae_url = "",
+#             title = "any more question?",
+#             text = "yes or no",
+#             actions = [
+#                     PostbackAction(
+#                         label = "yes",
+#                         display_text = "what's your question",
+#                         data = "yes"
+#                     ),
+#                     PostbackAction(
+#                         label = "no",
+#                         display_text = "ok thank you ",
+#                         data = "no"
+#                     )
+#                 ]
+#             )
+#         )
+#         line_bot_api.reply_message(event.reply_token,button_template_message )
+#         return
+#     else :
+#         message  = "please chose one of following before we can help you"
+#         line_bot_api.reply_message(event.reply_token,TextSendMessage(message) )
     
         
     
@@ -173,10 +173,10 @@ def buttontemplate(self,event):
         )
         line_bot_api.reply_message(event.reply_token,button_template_message )
         return
-    elif event.postback.data == 'action=buy&itemid=2' or 'yes':
-        self.flag = True
-    elif event.postback.data == 'no':
-        self.flag = False
+    # elif event.postback.data == 'action=buy&itemid=2' or 'yes':
+    #     self.flag = True
+    # elif event.postback.data == 'no':
+    #     self.flag = False
         
         
 import os
