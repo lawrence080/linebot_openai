@@ -146,7 +146,7 @@ def setUpInterface():
 
 
 @handler.add(PostbackEvent)
-def buttontemplate(self,event):
+def buttontemplate(event):
     if event.postback.data == "action=buy&itemid=1":
         button_template_message = TemplateSendMessage(
         alt_text = "invisiable",
